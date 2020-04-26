@@ -18,7 +18,7 @@ export default {
     msg: String
   }
 }
-//// comentario /////hhhhhggggggg 22222 333
+//// comentario /////hhhhhggggggg 22222 333 hhhh
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
