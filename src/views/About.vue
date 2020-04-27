@@ -241,7 +241,7 @@ export default {
         {
           id: "",
           categoria: "",
-          nmbre: "",
+          nombre: "",
           precio: "",
           imagenes: [
             {
@@ -537,7 +537,7 @@ export default {
       fetch("http://localhost:81/carro2/src/backend/post.php")
         .then((datos) => datos.json())
         .then((datos) => {
-          console.log(datos);
+          //  console.log(datos);
           this.total_productos2 = datos;
         });
 
@@ -559,23 +559,34 @@ export default {
     },
 
     seleccionar(valor) {
+      this.productos = [];
+      var cont = 0;
       for (var i = 0; i < this.total_productos2.length; i++) {
         // alert(this.total_productos2[i].nombre);
         if (valor == this.total_productos2[i].categoria) {
-          alert(this.total_productos2[i].nombre);
+          //  alert(this.total_productos2[i].nombre);
+          this.productos.push({
+            id: this.total_productos2[i].id,
+            categoria: this.total_productos2[i].categoria,
+            nombre: this.total_productos2[i].nombre,
+            precio: this.total_productos2[i].precio,
+           
+            image: [
+             
+                { src:this.total_productos2.imagenes[i].src,},
+            
+                 {src:this.total_productos2.imagenes[i+1].src,},
+           
+               {src:this.total_productos2.imagenes[i+2].src,}],
 
-          for (var j = 0; j < this.total_productos2.length * 3; j++) {
-            if (
-              this.total_productos2.imagenes[j].id ==
-              this.total_productos2[i].id
-            ) {
-              alert(this.total_productos2.imagenes[j].src + "  numero  " + j);
-            }
-          }
+          });
+          cont++;
         }
       }
+     
 
-      (this.productos = []),
+      console.log(this.productos);
+      /*   (this.productos = []),
         this.total_pruductos.forEach((element) => {
           if (element.categoria == valor) {
             this.productos.push({
@@ -585,7 +596,7 @@ export default {
               image: element.image,
             });
           }
-        });
+        });*/
 
       this.bandera = true;
       this.dialog2 = false;
