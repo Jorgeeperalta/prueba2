@@ -126,7 +126,7 @@ export default {
     return {
       galeria: false,
       cont: 0,
-      aux: "",
+      aux:'',
       shared: logica.data,
     };
   },
@@ -140,40 +140,19 @@ export default {
       }
     },
   },
+ 
   methods: {
     gal(){
           this.galeria=true
          
     },
-    cargar_datos() {
-      /*  var requestOptions = {
-                    method: 'GET',
-                    redirect: 'follow'
-                    };
-
-                    fetch("http://localhost:81/Vue-carrito-compras-basico/src/backend/post.php", requestOptions)
-                    .then(response => response.text())
-                    .then(result => console.log(result))
-                    .catch(error => console.log('error', error));*/
-
-      fetch(
-        "http://localhost:81/Vue-carrito-compras-basico/src/backend/post.php"
-      )
-        .then((datos) => datos.json())
-        .then((datos) => {
-          datos.forEach((element) => {
-            this.aux = element.nombre;
-          });
-        });
-
-      // this.editItem.hectarea = this.aux1;
-    },
+ 
     addToCart() {
       logica.add(this.producto);
     },
     inc() {
       logica.inc(this.producto);
-      // alert("forrr   " + this.aux);
+ 
     },
     dec() {
       logica.dec(this.producto);
