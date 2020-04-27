@@ -173,7 +173,13 @@
 
     <v-toolbar color="light-green darken-3" height="15px">
       <template v-slot:extension>
-        <v-btn color="cyan darken-2" fab x-large dark @click="dialog2 = true">
+        <v-btn
+          color="cyan darken-2"
+          fab
+          x-large
+          dark
+          @click="(dialog2 = true), cargar_datos()"
+        >
           <v-icon>format_list_bulleted</v-icon></v-btn
         >
         <v-spacer></v-spacer> <v-spacer></v-spacer>
@@ -231,6 +237,23 @@ export default {
 
   data() {
     return {
+      total_productos2: [
+        {
+          id: "",
+          categoria: "",
+          nmbre: "",
+          precio: "",
+          imagenes: [
+            {
+              id_imagen: "",
+              src: "",
+              id: "",
+            },
+          ],
+        },
+      ],
+
+      aux: "",
       abrir: false,
       bandera: false,
       dialog2: false,
@@ -272,8 +295,8 @@ export default {
           artist: "Ellie Gouldingc",
         },
       ],
-      total_pruductos:[
-        // total
+      total_pruductos: [
+        /* total
         {
           id: 1,
             categoria:1,
@@ -289,129 +312,179 @@ export default {
           
           ] ,
        },
-       // fin 
-      // anicio
+       */
+        // anicio
         {
           id: 2,
-            categoria:1,
+          categoria: 1,
           nombre: "Zanahoria",
           precio: 42,
-          image:[
-            
-               {src: "https://cdn.pixabay.com/photo/2016/11/30/12/29/bicycle-1872682__340.jpg"},
-               {src:"https://cdn.pixabay.com/photo/2018/05/24/02/07/peach-3425656__340.jpg"},
-               {src:"https://cdn.pixabay.com/photo/2018/01/25/08/14/tangerines-3105628__340.jpg"},
-            
-          
-          ] ,
-       },
-       // fin 
-       // anicio
+          image: [
+            {
+              src:
+                "https://cdn.pixabay.com/photo/2016/11/30/12/29/bicycle-1872682__340.jpg",
+            },
+            {
+              src:
+                "https://cdn.pixabay.com/photo/2018/05/24/02/07/peach-3425656__340.jpg",
+            },
+            {
+              src:
+                "https://cdn.pixabay.com/photo/2018/01/25/08/14/tangerines-3105628__340.jpg",
+            },
+          ],
+        },
+        // fin
+        // anicio
         {
           id: 3,
-            categoria:1,
+          categoria: 1,
           nombre: "Telefono",
           precio: 65,
-          image:[
-            
-               {src: "https://cdn.pixabay.com/photo/2018/05/24/02/07/peach-3425656__340.jpg"},
-               {src:"https://cdn.pixabay.com/photo/2018/05/24/02/07/peach-3425656__340.jpg"},
-               {src:"https://cdn.pixabay.com/photo/2018/01/25/08/14/tangerines-3105628__340.jpg"},
-            
-          
-          ] ,
-       },
-       // fin 
+          image: [
+            {
+              src:
+                "https://cdn.pixabay.com/photo/2018/05/24/02/07/peach-3425656__340.jpg",
+            },
+            {
+              src:
+                "https://cdn.pixabay.com/photo/2018/05/24/02/07/peach-3425656__340.jpg",
+            },
+            {
+              src:
+                "https://cdn.pixabay.com/photo/2018/01/25/08/14/tangerines-3105628__340.jpg",
+            },
+          ],
+        },
+        // fin
         // anicio
         {
           id: 4,
-            categoria:2,
+          categoria: 2,
           nombre: "Jabon en polvo",
           precio: 85,
-          image:[
-            
-              {src: "https://cdn.pixabay.com/photo/2018/05/24/02/07/peach-3425656__340.jpg"},
-             {src:"https://cdn.pixabay.com/photo/2018/05/24/02/07/peach-3425656__340.jpg"},
-              {src:"https://cdn.pixabay.com/photo/2018/01/25/08/14/tangerines-3105628__340.jpg"},
-            
-          
-          ] ,
-       },
-       // fin 
+          image: [
+            {
+              src:
+                "https://cdn.pixabay.com/photo/2018/05/24/02/07/peach-3425656__340.jpg",
+            },
+            {
+              src:
+                "https://cdn.pixabay.com/photo/2018/05/24/02/07/peach-3425656__340.jpg",
+            },
+            {
+              src:
+                "https://cdn.pixabay.com/photo/2018/01/25/08/14/tangerines-3105628__340.jpg",
+            },
+          ],
+        },
+        // fin
         // anicio
         {
           id: 5,
-              categoria:2,
+          categoria: 2,
           nombre: "Cerveza",
           precio: 75,
-          image:[
-            {src: "https://cdn.pixabay.com/photo/2018/05/24/02/07/peach-3425656__340.jpg"},
-              { src:"https://cdn.pixabay.com/photo/2018/05/24/02/07/peach-3425656__340.jpg"},
-               {src:"https://cdn.pixabay.com/photo/2018/01/25/08/14/tangerines-3105628__340.jpg"},
-          
-          ] ,
-       },
-       // fin 
-       // anicio
+          image: [
+            {
+              src:
+                "https://cdn.pixabay.com/photo/2018/05/24/02/07/peach-3425656__340.jpg",
+            },
+            {
+              src:
+                "https://cdn.pixabay.com/photo/2018/05/24/02/07/peach-3425656__340.jpg",
+            },
+            {
+              src:
+                "https://cdn.pixabay.com/photo/2018/01/25/08/14/tangerines-3105628__340.jpg",
+            },
+          ],
+        },
+        // fin
+        // anicio
         {
           id: 6,
-              categoria:2,
+          categoria: 2,
           nombre: "Coca Cola",
           precio: 45,
-          image:[
-            {src:  "https://cdn.pixabay.com/photo/2012/07/29/21/42/dresses-53319__340.jpg"},
-            {src:"https://cdn.pixabay.com/photo/2018/05/24/02/07/peach-3425656__340.jpg"},
-            {src:"https://cdn.pixabay.com/photo/2018/01/25/08/14/tangerines-3105628__340.jpg"},
-          
-          ] ,
-       },
-       // fin 
+          image: [
+            {
+              src:
+                "https://cdn.pixabay.com/photo/2012/07/29/21/42/dresses-53319__340.jpg",
+            },
+            {
+              src:
+                "https://cdn.pixabay.com/photo/2018/05/24/02/07/peach-3425656__340.jpg",
+            },
+            {
+              src:
+                "https://cdn.pixabay.com/photo/2018/01/25/08/14/tangerines-3105628__340.jpg",
+            },
+          ],
+        },
+        // fin
         // anicio
         {
           id: 7,
-              categoria:3,
+          categoria: 3,
           nombre: "Vino",
           precio: 99,
-          image:[
-            {src: "https://cdn.pixabay.com/photo/2018/05/24/02/07/peach-3425656__340.jpg"},
-            {src:"https://cdn.pixabay.com/photo/2018/05/24/02/07/peach-3425656__340.jpg"},
-            {src:"https://i.ibb.co/HDj6ZnH/chorizos-listos-parrilla.png"},
-          
-          ] ,
-       },
-       // fin 
+          image: [
+            {
+              src:
+                "https://cdn.pixabay.com/photo/2018/05/24/02/07/peach-3425656__340.jpg",
+            },
+            {
+              src:
+                "https://cdn.pixabay.com/photo/2018/05/24/02/07/peach-3425656__340.jpg",
+            },
+            { src: "https://i.ibb.co/HDj6ZnH/chorizos-listos-parrilla.png" },
+          ],
+        },
+        // fin
         // anicio
         {
           id: 8,
-              categoria:3,
+          categoria: 3,
           nombre: "Bananas",
           precio: 31,
-          image:[
-            {src: "https://cdn.pixabay.com/photo/2018/05/24/02/07/peach-3425656__340.jpg"},
-            {src:"https://i.ibb.co/Lx3N6L8/LANCHE.jpg"},
-            {src:"https://cdn.pixabay.com/photo/2018/01/25/08/14/tangerines-3105628__340.jpg"},
-          
-          ] ,
-       },
-       // fin 
+          image: [
+            {
+              src:
+                "https://cdn.pixabay.com/photo/2018/05/24/02/07/peach-3425656__340.jpg",
+            },
+            { src: "https://i.ibb.co/Lx3N6L8/LANCHE.jpg" },
+            {
+              src:
+                "https://cdn.pixabay.com/photo/2018/01/25/08/14/tangerines-3105628__340.jpg",
+            },
+          ],
+        },
+        // fin
         // anicio
         {
           id: 9,
-              categoria:3,
+          categoria: 3,
           nombre: "Verdurita",
           precio: 5,
-          image:[
-            {src: "https://cdn.pixabay.com/photo/2018/05/24/02/07/peach-3425656__340.jpg"},
-            {src:"https://cdn.pixabay.com/photo/2018/05/24/02/07/peach-3425656__340.jpg"},
-            {src:"https://i.ibb.co/HhcwrsJ/pata.jpg"},
-          
-          ] ,
-       },
-       // fin 
+          image: [
+            {
+              src:
+                "https://cdn.pixabay.com/photo/2018/05/24/02/07/peach-3425656__340.jpg",
+            },
+            {
+              src:
+                "https://cdn.pixabay.com/photo/2018/05/24/02/07/peach-3425656__340.jpg",
+            },
+            { src: "https://i.ibb.co/HhcwrsJ/pata.jpg" },
+          ],
+        },
+        // fin
       ],
       productos: [],
     };
   },
+
   watch: {
     text2(val) {
       this.apilink = "http://";
@@ -460,6 +533,21 @@ export default {
   },
 
   methods: {
+    cargar_datos() {
+      fetch("http://localhost:81/carro2/src/backend/post.php")
+        .then((datos) => datos.json())
+        .then((datos) => {
+          console.log(datos);
+          this.total_productos2 = datos;
+        });
+
+      fetch("http://localhost:81/carro2/src/backend/post_imag.php")
+        .then((datos) => datos.json())
+        .then((datos) => {
+          this.total_productos2.imagenes = datos;
+        });
+    },
+
     mercadopag() {
       /* let foo = document.createElement("script");
       foo.setAttribute(
@@ -471,6 +559,22 @@ export default {
     },
 
     seleccionar(valor) {
+      for (var i = 0; i < this.total_productos2.length; i++) {
+        // alert(this.total_productos2[i].nombre);
+        if (valor == this.total_productos2[i].categoria) {
+          alert(this.total_productos2[i].nombre);
+
+          for (var j = 0; j < this.total_productos2.length * 3; j++) {
+            if (
+              this.total_productos2.imagenes[j].id ==
+              this.total_productos2[i].id
+            ) {
+              alert(this.total_productos2.imagenes[j].src + "  numero  " + j);
+            }
+          }
+        }
+      }
+
       (this.productos = []),
         this.total_pruductos.forEach((element) => {
           if (element.categoria == valor) {
