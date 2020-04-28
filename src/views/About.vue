@@ -561,31 +561,36 @@ export default {
     seleccionar(valor) {
       this.productos = [];
       var cont = 0;
-      for (var i = 0; i < this.total_productos2.length; i++) {
-        // alert(this.total_productos2[i].nombre);
-        if (valor == this.total_productos2[i].categoria) {
-          //  alert(this.total_productos2[i].nombre);
-          this.productos.push({
-            id: this.total_productos2[i].id,
-            categoria: this.total_productos2[i].categoria,
-            nombre: this.total_productos2[i].nombre,
-            precio: this.total_productos2[i].precio,
-           
-            image: [
-             
-                { src:this.total_productos2.imagenes[i].src,},
-            
-                 {src:this.total_productos2.imagenes[i+1].src,},
-           
-               {src:this.total_productos2.imagenes[i+2].src,}],
 
-          });
-          cont++;
+      for (var i = 0; i < this.total_productos2.length; i++) {
+        if (valor == this.total_productos2[i].categoria) {
+          for (var j = 0; j < this.total_productos2.imagenes.length; j++) {
+            if (
+              this.total_productos2[i].id ==
+              this.total_productos2.imagenes[j].id
+            ) {
+              this.productos.push({
+                id: this.total_productos2[i].id,
+                categoria: this.total_productos2[i].categoria,
+                nombre: this.total_productos2[i].nombre,
+                precio: this.total_productos2[i].precio,
+
+                image: [
+                  { src: this.total_productos2.imagenes[j].src },
+
+                  { src: this.total_productos2.imagenes[j + 1].src },
+
+                  { src: this.total_productos2.imagenes[j + 2].src },
+                ],
+              });
+
+              break;
+            }
+          }
         }
       }
-     
 
-      console.log(this.productos);
+      //console.log(this.productos);
       /*   (this.productos = []),
         this.total_pruductos.forEach((element) => {
           if (element.categoria == valor) {
