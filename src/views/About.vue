@@ -534,14 +534,14 @@ export default {
 
   methods: {
     cargar_datos() {
-      fetch("http://localhost:81/carro2/src/backend/post.php")
+      fetch("http://jorgeperalta-001-site6.itempurl.com/post.php")
         .then((datos) => datos.json())
         .then((datos) => {
           //  console.log(datos);
           this.total_productos2 = datos;
         });
 
-      fetch("http://localhost:81/carro2/src/backend/post_imag.php")
+      fetch("http://jorgeperalta-001-site6.itempurl.com/post_imag.php")
         .then((datos) => datos.json())
         .then((datos) => {
           this.total_productos2.imagenes = datos;
