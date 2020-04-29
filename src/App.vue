@@ -3,7 +3,7 @@
     <div id="app">
       <div id="nav">
         <router-link to="/">Pagina principal</router-link> |
-        <router-link to="/about">Galeria</router-link>
+        <router-link to="/about">Tienda</router-link>
       </div>
       <router-view />
     </div>

@@ -534,12 +534,33 @@ export default {
 
   methods: {
     cargar_datos() {
-      fetch("http://jorgeperalta-001-site6.itempurl.com/post.php")
+/////////////////////////
+  var cont = 0;
+      async function asyncData() {
+        const response = await fetch(
+          "http://jorgeperalta-001-site6.itempurl.com/post.php"
+        );
+        const data = await response.json();
+
+        return data;
+      }
+
+      const result = asyncData();
+
+      result.then((data) => {
+        data.forEach((element) => {
+          this.total_productos2[cont] = element;
+          cont++;
+        });
+      });
+      ///////////////////////
+    /*  fetch("http://jorgeperalta-001-site6.itempurl.com/post.php")
         .then((datos) => datos.json())
         .then((datos) => {
           //  console.log(datos);
           this.total_productos2 = datos;
-        });
+        });*/
+        
 
       fetch("http://jorgeperalta-001-site6.itempurl.com/post_imag.php")
         .then((datos) => datos.json())
