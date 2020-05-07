@@ -90,7 +90,13 @@
     <v-dialog v-model="dialog2">
       <!-- buscador de categorias-->
 
-      <v-card class="mx-auto" height="400" width="256" color="blue-grey darken-3">
+      <v-card
+        class="mx-auto"
+        height="450"
+        width="256"
+        color="blue-grey darken-3"
+      >
+        <!--
         <div class="pa-2">
           <v-btn color="purple accent-3" block @click="seleccionar(1)"
             >Limpieza</v-btn
@@ -104,34 +110,64 @@
         </div>
         <div class="pa-2">
           <v-btn color="red" block @click="dialog2 = false">salir</v-btn>
+       
+        </div>
+        -->
+        <v-img
+          class="white--text align-end"
+          height="200px"
+          width="256"
+          src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+        >
+        </v-img>
+        <v-spacer></v-spacer> <br />
+        <v-label>Seleccione una categoria</v-label>
+        <select v-model="eleccion" class="select-css">
+          <option
+            v-for="(item, index) in items2"
+            :key="index"
+            v-bind:value="item.nombre"
+          >
+            {{ item.nombre }}
+          </option>
+        </select>
+
+        <div class="pa-2">
+          <v-btn color="blue" block @click="seleccionar(eleccion)"
+            >Buscar</v-btn
+          >
+        </div>
+        <div class="pa-2">
+          <v-btn color="red" block @click="dialog2 = false">salir</v-btn>
         </div>
       </v-card>
     </v-dialog>
     <template>
       <v-row>
-        <v-dialog v-model="dialog" width="500px">
+        <v-dialog v-model="dialog" width="500px" >
           <!-- carrito de compra -->
-          <v-card dark color="black">
+          <v-card dark color="black" >
             <v-card-title>
               <span class="headline"></span>
             </v-card-title>
             <carrito></carrito>
-            <v-card-actions>
+            <div >
               <v-spacer></v-spacer>
+              <div> 
               <v-flex xs10>
                 <v-text-field
                   single-line
                   outline
                   color="teal"
                   v-model="nombre"
-                  label="Nombre"
+                  label="**Nombre"
                 ></v-text-field>
               </v-flex>
               <br />
-              <br />
+              
               <v-flex xs10>
                 <v-text-field
-                  label="Direccion"
+                  label="**Direccion"
                   single-line
                   color="teal"
                   class="my-input"
@@ -139,7 +175,7 @@
                   outline
                 ></v-text-field>
               </v-flex>
-              <v-flex xs2>
+              </div>
                 <v-btn
                   large
                   class="teal--text"
@@ -154,18 +190,20 @@
                   :href="apilink"
                   target="_blank"
                 >
+                     Enviar pedido via Whatsapp -----
                   <v-icon large>send</v-icon>
+                  
                 </v-btn>
-              </v-flex>
-              <div><form ref="myform"></form></div>
+              <br>
+       
               <v-spacer></v-spacer>
 
-              <br />
+             
 
               <v-btn color="red" @click="dialog = false"
-                ><v-icon>delete_forever</v-icon></v-btn
+                >Elimina <v-icon>delete_forever</v-icon></v-btn
               >
-            </v-card-actions>
+            </div>
           </v-card>
         </v-dialog>
       </v-row>
@@ -212,16 +250,16 @@
         :key="producto.id"
       ></producto>
     </div>
-
-
   </v-app>
 </template>
 
 <script>
 import producto from "@/components/producto.vue";
 import carrito from "@/components/carrito.vue";
+
 import logica from "../logica";
 import _ from "lodash";
+import catalogo from "@/components/Catalogo.vue";
 
 export default {
   components: {
@@ -264,10 +302,10 @@ export default {
       text: "",
       text2: "",
       apilink: "",
-
+      items2: "",
       dialog: false,
       drawer: null,
-
+      eleccion: "",
       nombre: "",
       direccion: "",
 
@@ -289,9 +327,7 @@ export default {
           artist: "Ellie Gouldingc",
         },
       ],
-      total_pruductos: [
-      
-      ],
+      total_pruductos: [],
       productos: [],
     };
   },
@@ -325,6 +361,9 @@ export default {
         );
     },
   },
+  mounted() {
+    this.llamar_categorias();
+  },
   created: function() {
     this.apilink = "http://";
     this.apilink += this.isMobile() ? "api" : "web";
@@ -344,9 +383,28 @@ export default {
   },
 
   methods: {
+    llamar_categorias() {
+      var cont = 0;
+      async function asyncData() {
+        const response = await fetch(
+          "http://localhost:81/Demo_carro/src/backend/catalogo.php"
+        );
+        const data = await response.json();
+
+        return data;
+      }
+
+      const result = asyncData();
+
+      result.then((data) => {
+        this.items2 = data;
+
+        console.log(this.items2);
+      });
+    },
     cargar_datos() {
-/////////////////////////
-  var cont = 0;
+      /////////////////////////
+      /*var cont = 0;
       async function asyncData() {
         const response = await fetch(
           "http://jorgeperalta-001-site6.itempurl.com/post.php"
@@ -365,19 +423,18 @@ export default {
         });
       });
       ///////////////////////
-    /*  fetch("http://jorgeperalta-001-site6.itempurl.com/post.php")
+       fetch("http://jorgeperalta-001-site6.itempurl.com/post.php")
         .then((datos) => datos.json())
         .then((datos) => {
           //  console.log(datos);
           this.total_productos2 = datos;
-        });*/
-        
+        });
 
       fetch("http://jorgeperalta-001-site6.itempurl.com/post_imag.php")
         .then((datos) => datos.json())
         .then((datos) => {
           this.total_productos2.imagenes = datos;
-        });
+        }); /*
     },
 
     mercadopag() {
@@ -393,7 +450,22 @@ export default {
     seleccionar(valor) {
       this.productos = [];
       var cont = 0;
+      var requestOptions = {
+        method: "GET",
 
+        redirect: "follow",
+      };
+
+      fetch(
+        "http://localhost:81/Demo_carro/src/backend/articulos.php?categoria=" +
+          valor,
+        requestOptions
+      )
+        .then((response) => response.json())
+        .then((result) => console.log((this.productos = result)))
+        .catch((error) => console.log("error", error));
+
+      /*
       for (var i = 0; i < this.total_productos2.length; i++) {
         if (valor == this.total_productos2[i].categoria) {
           for (var j = 0; j < this.total_productos2.imagenes.length; j++) {
@@ -423,7 +495,7 @@ export default {
       }
 
       //console.log(this.productos);
-      /*   (this.productos = []),
+         (this.productos = []),
         this.total_pruductos.forEach((element) => {
           if (element.categoria == valor) {
             this.productos.push({
@@ -470,6 +542,32 @@ export default {
 };
 </script>
 <style scoped>
+.select-css {
+  display: block;
+  font-size: 16px;
+  font-family: "Verdana", sans-serif;
+  font-weight: 400;
+  color: rgb(234, 235, 225);
+  line-height: 1.3;
+  padding: 0.4em 1.4em 0.3em 0.8em;
+  width: 400px;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 20px auto;
+  border: 1px solid #aaa;
+  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.03);
+  border-radius: 0.3em;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: rgb(17, 17, 17);
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E"),
+    linear-gradient(to bottom, #0f0f0f 0%, #0c0c0c 100%);
+  background-repeat: no-repeat, repeat;
+  background-position: right 0.7em top 50%, 0 0;
+  background-size: 0.65em auto, 100%;
+}
+
 .fondo {
   background-color: rgb(207, 204, 181);
   left: 100%;

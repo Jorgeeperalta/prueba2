@@ -75,6 +75,6 @@ img {
   padding: 0.5em;
 }
 .tex{
-  background-color: rgb(243, 148, 6);
+  background-color: rgb(6, 112, 41);
 }
 </style>

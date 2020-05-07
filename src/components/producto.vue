@@ -2,7 +2,7 @@
   <div class="producto">
     <v-dialog v-model="galeria" width="800">
       <v-card width="800">
-        <v-carousel>
+     <!--   <v-carousel>
           <v-carousel-item
             v-for="(item, i) in producto.image"
             :key="i"
@@ -11,7 +11,13 @@
             reverse-transition="fade-transition"
             transition="fade-transition"
           ></v-carousel-item>
-        </v-carousel>
+        </v-carousel> -->
+
+         <v-carousel :show-arrows="false">
+            <v-carousel-item :src="producto.url"></v-carousel-item>
+            <v-carousel-item :src="producto.url2"></v-carousel-item>
+            <v-carousel-item :src="producto.url3"></v-carousel-item>
+          </v-carousel>
       </v-card>
     </v-dialog>
     <br />
@@ -20,12 +26,13 @@
       <v-card
         class="mx-auto"
         color="grey lighten-4"
-        max-width="700"
+        max-width="500"
         height="700"
       >
+         <img max-width="100" height="300"  v-bind:src="producto.url2" />
         <div v-for="(item, i) in producto.image" :key="i">
           <div v-if="i == 1">
-            <img :aspect-ratio="16 / 9" v-bind:src="item.src" />
+            <img width="150" height="100" :aspect-ratio="16 / 9" v-bind:src="item.src" />
           </div>
         </div>
 
@@ -124,6 +131,9 @@ export default {
   props: ["producto"],
   data() {
     return {
+       imag1: "",
+    imag2: "",
+    imag3: "",
       galeria: false,
       cont: 0,
       aux:'',
@@ -142,6 +152,13 @@ export default {
   },
  
   methods: {
+     zoon(ima1, ima2, ima3) {
+      this.imag1 = ima1;
+      this.imag2 = ima2;
+      this.imag3 = ima3;
+      this.dialog2 = true;
+    
+    },
     gal(){
           this.galeria=true
          
