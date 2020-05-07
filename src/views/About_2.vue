@@ -266,7 +266,7 @@ export default {
     producto,
     carrito,
   },
-
+/////
   data() {
     return {
       total_productos2: [
