@@ -46,7 +46,7 @@
               <br /><br /><br />
               <br /><br /><br />
               <br />
-              A solo $ {{ producto.precio }}
+              Cantidad de productos  {{ cont }}
             </p>
           </div>
         </v-expand-transition>
@@ -182,7 +182,7 @@ export default {
   align-items: center;
   bottom: 0;
   justify-content: center;
-  opacity: 0.5;
+  opacity: 0.05;
   position: absolute;
   width: 100%;
 }
