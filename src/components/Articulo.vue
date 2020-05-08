@@ -252,7 +252,7 @@ export default {
       var cont = 0;
       async function asyncData() {
         const response = await fetch(
-          "http://localhost:81/Demo_carro/src/backend/articulos.php"
+          "http://jorgeperalta-001-site6.itempurl.com/articulos.php"
         );
         const data = await response.json();
 
@@ -270,7 +270,7 @@ export default {
       var cont = 0;
       async function asyncData() {
         const response = await fetch(
-          "http://localhost:81/Demo_carro/src/backend/catalogo.php"
+          "http://jorgeperalta-001-site6.itempurl.com/catalogo.php"
         );
         const data = await response.json();
 

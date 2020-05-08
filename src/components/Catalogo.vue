@@ -136,7 +136,7 @@ export default {
       };
 
       fetch(
-        "http://localhost:81/Demo_carro/src/backend/catalogo.php",
+        "http://jorgeperalta-001-site6.itempurl.com/catalogo.php",
         requestOptions
       )
         .then((response) => response.json())
@@ -187,8 +187,8 @@ export default {
       if (this.editedIndex > -1) {
         var formdata = new FormData();
         formdata.append("id", this.idd);
-        formdata.append("nombre", this.nombree);
-        formdata.append("descripcion", this.descripcionn);
+        formdata.append("nombre",this.nombree );
+        formdata.append("descripcion",this.descripcionn );
 
         var requestOptions = {
           method: "PUT",
@@ -213,8 +213,8 @@ export default {
         var formdata = new FormData();
 
         formdata.append("id", this.editedItem.id);
-        formdata.append("nombre", this.editedItem.descripcion);
-        formdata.append("descripcion", this.editedItem.nombre);
+        formdata.append("nombre",this.editedItem.nombre);
+        formdata.append("descripcion", this.editedItem.descripcion);
 
         var requestOptions = {
           method: "POST",
