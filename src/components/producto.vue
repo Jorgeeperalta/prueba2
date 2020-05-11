@@ -107,8 +107,8 @@
           </p>
           <div class="font-weight-light title mb-2 orange--text mb-2">
             Envios sin cargo<br />
-            <br />
-            <br />
+            
+            
             <div v-if="cont > 0">
               <h4 class="display-1 font-weight-light orange--text mb-2">
                 Productos {{ cont }} en el

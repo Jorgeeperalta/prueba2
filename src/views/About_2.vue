@@ -144,63 +144,60 @@
     </v-dialog>
     <template>
       <v-row>
-        <v-dialog v-model="dialog" width="500px" >
+        <v-dialog v-model="dialog" width="500px">
           <!-- carrito de compra -->
-          <v-card dark color="black" >
+          <v-card dark color="black">
             <v-card-title>
               <span class="headline"></span>
             </v-card-title>
             <carrito></carrito>
-            <div >
+            <div>
               <v-spacer></v-spacer>
-              <div> 
-              <v-flex xs10>
-                <v-text-field
-                  single-line
-                  outline
-                  color="teal"
-                  v-model="nombre"
-                  label="**Nombre"
-                ></v-text-field>
-              </v-flex>
-              <br />
-              
-              <v-flex xs10>
-                <v-text-field
-                  label="**Direccion"
-                  single-line
-                  color="teal"
-                  class="my-input"
-                  v-model="text"
-                  outline
-                ></v-text-field>
-              </v-flex>
+              <div>
+                <v-flex xs10>
+                  <v-text-field
+                    single-line
+                    outline
+                    color="teal"
+                    v-model="nombre"
+                    label="**Nombre"
+                  ></v-text-field>
+                </v-flex>
+                <br />
+
+                <v-flex xs10>
+                  <v-text-field
+                    label="**Direccion"
+                    single-line
+                    color="teal"
+                    class="my-input"
+                    v-model="text"
+                    outline
+                  ></v-text-field>
+                </v-flex>
               </div>
-                <v-btn
-                  large
-                  class="teal--text"
-                  icon
-                  @click="
-                    fab = !fab;
-                    menu = false;
-                    dialog = false;
+              <v-btn
+                large
+                class="teal--text"
+                icon
+                @click="
+                  fab = !fab;
+                  menu = false;
+                  dialog = false;
 
-                    abrir = true;
-                  "
-                  :href="apilink"
-                  target="_blank"
-                >
-                     Enviar pedido via Whatsapp -----
-                  <v-icon large>send</v-icon>
-                  
-                </v-btn>
-              <br>
-       
+                  abrir = true;
+                "
+                :href="apilink"
+                target="_blank"
+              >
+                Enviar pedido via Whatsapp -----
+                <v-icon large>send</v-icon>
+              </v-btn>
+              <br />
+
               <v-spacer></v-spacer>
 
-             
-
-              <v-btn color="red" @click="dialog = false"
+              <v-btn color="red" @click="(dialog = false), elimina_compra()"
                 >Elimina <v-icon>delete_forever</v-icon></v-btn
               >
             </div>
@@ -266,7 +263,7 @@ export default {
     producto,
     carrito,
   },
-/////
+  /////
   data() {
     return {
       total_productos2: [
@@ -405,7 +402,7 @@ export default {
     },
     cargar_datos() {
       /////////////////////////
-      /*var cont = 0;
+      /* var cont = 0;
       async function asyncData() {
         const response = await fetch(
           "http://jorgeperalta-001-site6.itempurl.com/post.php"
@@ -422,7 +419,8 @@ export default {
           this.total_productos2[cont] = element;
           cont++;
         });
-      });
+      });´
+      
       ///////////////////////
        fetch("http://jorgeperalta-001-site6.itempurl.com/post.php")
         .then((datos) => datos.json())
@@ -446,14 +444,14 @@ export default {
       );
       foo.setAttribute("data-transaction-amount", "14.90");
       this.$refs.myform.appendChild(foo);*/
- this.productos = [];
+      this.productos = [];
       var cont = 0;
       var requestOptions = {
         method: "GET",
 
         redirect: "follow",
       };
-//
+      //
       fetch(
         "http://jorgeperalta-001-site6.itempurl.com/articulos.php",
         requestOptions
@@ -461,25 +459,21 @@ export default {
         .then((response) => response.json())
         .then((result) => console.log((this.productos = result)))
         .catch((error) => console.log("error", error));
-
     },
 
     seleccionar(valor) {
-            
-     var cont=0;
-     var aux=[];
-        this.productos.forEach((element)=>{
-           
-            if(valor==element.categoria){
-                  console.log(valor+element.categoria);
-                aux[cont]=element;
-                cont++;
-               
-            }
-        })
+      var cont = 0;
+      var aux = [];
+      this.productos.forEach((element) => {
+        if (valor == element.categoria) {
+          console.log(valor + element.categoria);
+          aux[cont] = element;
+          cont++;
+        }
+      });
 
-        this.productos=aux;
-//
+      this.productos = aux;
+      //
       /*
       for (var i = 0; i < this.total_productos2.length; i++) {
         if (valor == this.total_productos2[i].categoria) {
@@ -524,6 +518,9 @@ export default {
 
       this.bandera = true;
       this.dialog2 = false;
+    },
+    elimina_compra() {
+      this.articulos = "";
     },
     cambiar() {
       this.canasta.forEach((element) => {

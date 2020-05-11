@@ -134,7 +134,7 @@ export default {
 
         redirect: "follow",
       };
-
+      //
       fetch(
         "http://jorgeperalta-001-site6.itempurl.com/catalogo.php",
         requestOptions
@@ -157,17 +157,13 @@ export default {
       const index = this.desserts.indexOf(item);
       confirm("Esta seguro de eliminar este item?") &&
         this.desserts.splice(index, 1);
-          var formdata = new FormData();
 
       var requestOptions = {
         method: "DELETE",
-        body: formdata,
-        redirect: "follow",
       };
 
       fetch(
-        "http://localhost:81/Demo_carro/src/backend/catalogo.php?id=" +
-          item.id,
+        "http://jorgeperalta-001-site6.itempurl.com/catalogo.php?id=" + item.id,
         requestOptions
       )
         .then((response) => response.text())
@@ -185,19 +181,16 @@ export default {
 
     save() {
       if (this.editedIndex > -1) {
-        var formdata = new FormData();
-        formdata.append("id", this.idd);
-        formdata.append("nombre",this.nombree );
-        formdata.append("descripcion",this.descripcionn );
+      
 
         var requestOptions = {
           method: "PUT",
-          body: formdata,
+         
           redirect: "follow",
         };
 
         fetch(
-          "http://localhost:81/Demo_carro/src/backend/catalogo.php?id=" +
+          "http://jorgeperalta-001-site6.itempurl.com/catalogo.php?id=" +
             this.editedItem.id +
             "&nombre=" +
             this.editedItem.nombre +
@@ -207,13 +200,13 @@ export default {
         )
           .then((response) => response.text())
           .then((result) => console.log(result));
-            this.initialize();
+        this.initialize();
         //  Object.assign(this.desserts[this.editedIndex], this.editedItem);
       } else {
         var formdata = new FormData();
 
         formdata.append("id", this.editedItem.id);
-        formdata.append("nombre",this.editedItem.nombre);
+        formdata.append("nombre", this.editedItem.nombre);
         formdata.append("descripcion", this.editedItem.descripcion);
 
         var requestOptions = {
@@ -223,13 +216,13 @@ export default {
         };
 
         fetch(
-          "http://localhost:81/Demo_carro/src/backend/catalogo.php",
+          "http://jorgeperalta-001-site6.itempurl.com/catalogo.php",
           requestOptions
         )
           .then((response) => response.text())
           .then((result) => console.log(result));
         // this.desserts.push(this.editedItem);
-            this.initialize();
+        this.initialize();
       }
       this.close();
     },
