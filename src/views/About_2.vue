@@ -432,24 +432,24 @@ export default {
       fetch("http://jorgeperalta-001-site6.itempurl.com/post_imag.php")
         .then((datos) => datos.json())
         .then((datos) => {
-          this.total_productos2.imagenes = datos;
-        }); /*
-    },
+                  this.total_productos2.imagenes = datos;
+                }); /*
+              },
 
-    mercadopag() {
-      /* let foo = document.createElement("script");
-      foo.setAttribute(
-        "src",
-        "https://www.mercadopago.com.br/integrations/v1/web-tokenize-checkout.js"
-      );
-      foo.setAttribute("data-transaction-amount", "14.90");
-      this.$refs.myform.appendChild(foo);*/
-      this.productos = [];
-      var cont = 0;
-      var requestOptions = {
-        method: "GET",
+                  mercadopag() {
+                    /* let foo = document.createElement("script");
+                    foo.setAttribute(
+                      "src",
+                      "https://www.mercadopago.com.br/integrations/v1/web-tokenize-checkout.js"
+                    );
+                    foo.setAttribute("data-transaction-amount", "14.90");
+                    this.$refs.myform.appendChild(foo);*/
+                    this.productos = [];
+              var cont = 0;
+              var requestOptions = {
+                method: "GET",
 
-        redirect: "follow",
+                redirect: "follow",
       };
       //
       fetch(
