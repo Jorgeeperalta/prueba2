@@ -150,7 +150,7 @@
             <v-card-title>
               <span class="headline"></span>
             </v-card-title>
-            <carrito></carrito>
+            <carrito  @t_producto="canti=$event"></carrito>
             <div>
               <v-spacer></v-spacer>
               <div>
@@ -226,9 +226,16 @@
           fab
           x-large
           dark
-          @click="cambiar(), mercadopag()"
+          @click="cambiar()"
         >
+        <v-badge
+        :content="messages"
+        :value="messages"
+        color="green"
+        overlap
+      >
           <v-icon>local_grocery_store</v-icon>
+        </v-badge>
         </v-btn>
       </template>
     </v-toolbar>
@@ -245,7 +252,7 @@
         v-for="producto in productos"
         :producto="producto"
         :key="producto.id"
-      ></producto>
+     ></producto>
     </div>
   </v-app>
 </template>
@@ -263,9 +270,12 @@ export default {
     producto,
     carrito,
   },
+  
+
   /////
   data() {
     return {
+      messages:'Total',
       total_productos2: [
         {
           id: "",
@@ -371,13 +381,14 @@ export default {
       "&text=" +
       encodeURI("hola esta es una prueba!");
   },
-  computed: {
+  watch: {
     total() {
       return _.sumBy(this.canasta, function(it) {
         return it.precio * it.qty;
         this.cantidad = it.qty;
       });
     },
+    
   },
 
   methods: {
@@ -524,6 +535,7 @@ export default {
     },
     cambiar() {
       this.canasta.forEach((element) => {
+       
         this.articulos =
           " " +
           this.articulos +

@@ -321,10 +321,9 @@ export default {
 
     save() {
       if (this.editedIndex > -1) {
-
         var requestOptions = {
           method: "PUT",
-           redirect: "follow",
+          redirect: "follow",
         };
 
         fetch(
@@ -374,7 +373,6 @@ export default {
         this.cargar_datos();
 
         this.close();
-        
       }
       this.close();
     },
@@ -389,7 +387,6 @@ export default {
 
         redirect: "follow",
       };
-      
 
       fetch(
         "http://jorgeperalta-001-site6.itempurl.com/articulos.php?id=" +

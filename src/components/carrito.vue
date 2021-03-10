@@ -1,30 +1,22 @@
 <template>
-  <div class="tex" >
-    
+  <div class="tex">
     <h1>Carrito de compra</h1>
-    
-   
 
-    <br>
-    <div  v-for="(item,index) in items" :key="index">
-       
-      <div >
+    <br />
+    <div v-for="(item, index) in items" :key="index">
+      <div>
         <div>{{ item.nombre }} Cant. {{ item.qty }}</div>
-         <div>{{ item.precio }}</div>
-       
+        <div>{{ item.precio }}</div>
       </div>
-      <div >Sub-Total $ {{ item.qty * item.precio }}</div>
+      <div>Sub-Total $ {{ item.qty * item.precio }}</div>
       <div>------------------</div>
     </div>
----------------------------------------------------------------------------------
-    <div >
-      Total de su
-      compra 
-      $ {{ total }}
- <!--      <h1>{{items}}</h1>  -->
+    ---------------------------------------------------------------------------------
+    <div>
+      Total de su compra $ {{ total }}
+      <!--      <h1>{{items}}</h1>  -->
     </div>
   </div>
- 
 </template>
 <script>
 import logica from "../logica";
@@ -33,19 +25,36 @@ import _ from "lodash";
 export default {
   data() {
     return {
+      cont:0,
       items: logica.data.cart,
-      
     };
-   
   },
+ 
   computed: {
     total() {
-      return _.sumBy(this.items, function (it) {
+      return _.sumBy(this.items, function(it) {
         return it.precio * it.qty;
+        this.cont=this.cont+it.qty;
       });
-    
+      
     },
+    t_canasta(){
+      return _.sumBy(this.items, function(it) {
+        return ( it.qty);
+   
+      });
+    },
+    
   },
+  methods:{
+             canasta(){
+                
+                      this.cont=this.cont+t_canasta();
+                       this.$emit("t_productos", 555);
+             },
+  },
+
+
 };
 </script>
 <style>
@@ -74,7 +83,7 @@ img {
   border: 1px solid black;
   padding: 0.5em;
 }
-.tex{
+.tex {
   background-color: rgb(6, 112, 41);
 }
 </style>

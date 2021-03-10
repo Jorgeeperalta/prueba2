@@ -60,7 +60,7 @@
             large
             left
             top
-            @click="cont--, dec(), mercadopag()"
+            @click="cont--, dec()"
             v-if="cont > 0"
           >
             <v-icon>remove_shopping_cart</v-icon>
@@ -166,6 +166,8 @@ export default {
  
     addToCart() {
       logica.add(this.producto);
+     
+
     },
     inc() {
       logica.inc(this.producto);
